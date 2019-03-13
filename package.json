@@ -1,0 +1,43 @@
+{
+  "name": "saas-messaging",
+  "version": "1.0.0",
+  "description": "An ultra fast Node.js application for handling messaging (SSE)",
+  "main": "lib/index",
+  "types": "lib/index",
+  "scripts": {
+    "start": "npm run build:live",
+    "build": "npm run ts:lint && ./node_modules/.bin/tsc",
+    "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/index.ts",
+    "test": "jest --forceExit --coverage --verbose",
+    "ts:lint": "./node_modules/.bin/tslint -c tslint.json 'src/**/*.ts'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tradelab/saas-messaging.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tradelab/saas-messaging/issues"
+  },
+  "homepage": "https://github.com/tradelab/saas-messaging#readme",
+  "devDependencies": {
+    "@types/jest": "^23.1.4",
+    "@types/node": "^10.5.1",
+    "jest": "^23.3.0",
+    "nodemon": "^1.17.5",
+    "ts-jest": "^23.0.0",
+    "ts-node": "^7.0.0",
+    "tslint": "^5.10.0",
+    "typescript": "^2.9.2"
+  },
+  "dependencies": {
+    "@types/kafka-node": "^2.0.6",
+    "@types/uuid": "^3.4.3",
+    "express": "^4.16.3",
+    "kafka-node": "^2.6.1",
+    "sse-channel": "^3.1.0",
+    "uuid": "^3.3.2"
+  }
+}

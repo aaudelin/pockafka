@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Realtime Demo</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+</head>
+<body>
+        <h1>Realtime Demo</h1>
+        <ul id="live-updates"></ul>
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script>
+             var live = {
+                 init : function() {
+                             var source = new EventSource("http://127.0.0.1:8080/events");
+                               console.log(source.withCredentials);
+  console.log(source.readyState);
+  console.log(source.url);
+                            source.onerror = function() {
+                              console.log("EventSource failed.");
+                            };
+                              source.onopen = function() {
+    console.log("Connection to server opened.");
+  };
+  source.onmessage = function(e) {
+    console.log(e);
+    live.addItem(event.data);
+  };
+                            /*source.addEventListener("message", function(event) {
+                                live.addItem(event.data);
+                            }, false);*/
+                     },
+
+                     addItem : function(data) {
+                                     $(live.constructItem(data)).hide().prependTo("#live-updates").fadeIn(1000);
+                     },
+
+                     constructItem : function(data) {
+                         return "<li>" + data + "</li>";
+                     }
+            };
+
+            $(document).ready(function(){
+                    live.init();
+            });
+         </script>
+    </body>
+</html>
